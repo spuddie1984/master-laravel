@@ -10928,3 +10928,15 @@ a.text-dark:focus {
   }
 }
 
+.custom-nav .nav-link {
+  background: none;
+}
+
+.custom-nav .nav-link:focus {
+  outline: none;
+}
+
+.custom-nav input {
+  border: none;
+}
+

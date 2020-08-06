@@ -1,0 +1,12 @@
+.custom-nav{
+    & .nav-link{
+        background: none;
+        &:focus{
+
+            outline: none;
+        }
+    }
+    input{
+        border: none;
+    }
+}
