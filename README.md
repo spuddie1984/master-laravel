@@ -24,3 +24,8 @@ A Repository that follows along with the Udemy Course "[Master Laravel PHP for B
 - Add Mass Assignability to the BlogPosts Model
 - Add Custom Scss file
 
+##### 3rd Commit - Redirects and Flash Messages
+
+- Add redirect to all necessary crud routes
+- Add flash error and success messages to necessary crud routes
+- Finish CRUD routes

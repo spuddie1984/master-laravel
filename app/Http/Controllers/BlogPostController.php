@@ -6,6 +6,7 @@ use App\BlogPost;
 use App\Http\Requests\ValidateBlogPost;
 use Illuminate\Http\Request;
 
+
 class BlogPostController extends Controller
 {
     /**
@@ -24,10 +25,11 @@ class BlogPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         // Create a New Blog Post
         return view('posts.create');
+
     }
 
     /**
@@ -46,6 +48,9 @@ class BlogPostController extends Controller
         // only validated fillable form inputs will be added to DB
         $post = BlogPost::create($validated);
 
+        $blogPost->session()->flash('status', 'Post created Successfully');
+
+        return redirect(route('posts.show', ['post' => $post->id]));
     }
 
     /**
@@ -54,7 +59,7 @@ class BlogPostController extends Controller
      * @param  \App\BlogPost  $blogPost
      * @return \Illuminate\Http\Response
      */
-    public function show(BlogPost $blogPost, $id)
+    public function show(BlogPost $BlogPost, $id)
     {
         // Show the Individual Post
         return view('posts.show', ['post' => blogPost::findOrFail($id)]);
@@ -66,9 +71,10 @@ class BlogPostController extends Controller
      * @param  \App\BlogPost  $blogPost
      * @return \Illuminate\Http\Response
      */
-    public function edit(BlogPost $blogPost)
+    public function edit(BlogPost $BlogPost, $id)
     {
-        //
+        // Show a form for the user to edit a post
+        return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
     /**
@@ -78,9 +84,17 @@ class BlogPostController extends Controller
      * @param  \App\BlogPost  $blogPost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BlogPost $blogPost)
+    public function update(ValidateBlogPost $blogPost, $id)
     {
-        //
+        // Validate data, grab post from DB, Update post, redirect
+        $validated = $blogPost->validated();
+        $post = BlogPost::findOrFail($id);
+        $post->fill($validated);
+        $post->save();
+
+        $blogPost->session()->flash('status', 'Post updated successfully!');
+
+        return redirect(route('posts.show', ['post' => $post->id]));
     }
 
     /**
@@ -89,9 +103,14 @@ class BlogPostController extends Controller
      * @param  \App\BlogPost  $blogPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BlogPost $blogPost, $id)
+    public function destroy(Request $request, $id)
     {
         // Delete post from DB
-        BlogPost::destroy($id);
+        $post = BlogPost::findOrFail($id);
+        $post->delete();
+
+        $request->session()->flash('status', 'Blog Post successfully deleted!');
+
+        return redirect(route('posts.index'));
     }
 }

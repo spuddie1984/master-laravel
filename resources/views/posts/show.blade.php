@@ -14,6 +14,9 @@
 @endsection
 
 @section('content')
+@if (session()->has('status'))
+<div class="alert alert-success" role="alert">{{ session('status') }}</div>
+@endif
 
 <h1>{{ $post->title }}</h1>
 
