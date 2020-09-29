@@ -15,8 +15,8 @@ class AddContentsToBlogPostsTable extends Migration
     {
         Schema::table('blog_posts', function (Blueprint $table) {
             //
-            $table->string('title');
-            $table->text('content')->nullable();
+            $table->string('title')->default();
+            $table->text('content')->nullable()->default();
         });
     }
 

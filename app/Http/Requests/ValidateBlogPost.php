@@ -25,8 +25,8 @@ class ValidateBlogPost extends FormRequest
     {
         return [
             //
-            'title'   => 'required',
-            'content' => 'string'
+            'title'   => 'required|min:4',
+            'content' => 'string|min:5'
         ];
     }
 }

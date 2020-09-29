@@ -29,3 +29,9 @@ A Repository that follows along with the Udemy Course "[Master Laravel PHP for B
 - Add redirect to all necessary crud routes
 - Add flash error and success messages to necessary crud routes
 - Finish CRUD routes
+
+##### 4th Commit - Comments, Testing
+
+- Add edit, delete buttons to blog post index page
+- Add unit testing functionality
+- Add Comments and Author Model, migration
